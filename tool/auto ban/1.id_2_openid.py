@@ -23,6 +23,8 @@ def _send_get(idin, browser):
         
 
 browser = webdriver.Chrome('C:\\chromedriver')
+browser.maximize_window()
+
 
 browser.get('http://49.51.228.253/ajax/ajax.html')
 

@@ -3,6 +3,8 @@ from selenium.webdriver.common.keys import Keys
 import time
 
 br = webdriver.Chrome('C:\\chromedriver')
+browser.maximize_window()
+
 
 br.get('http://49.51.228.253/ajax/ajax.html')
 
