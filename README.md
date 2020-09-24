@@ -4,7 +4,7 @@ TOYs của team OP Bắp Gi Mô Bồ
 
 2. chạy "install.bat" để cài các thứ cần thiết
 
-3. vô folder tool rồi chọn tool để chạy
+3. vô folder "tool" rồi chọn tool để chạy
 
 
 
