@@ -46,11 +46,12 @@ def _load_logo():
         i = i.replace('\n', '')
         print(i)
     print()
-    print('Team OP\'s Tool')
-    print('--Made by Nguyen Q Loc--')
+    print(' Team OP\'s Tool')
+    print(' --Made by Nguyen Q Loc--')
     print()
 
 def _load_dataframe():
+    global IS_LOADED
     global COLUMN_NAME
     global COLUMNS_TO_DROP
 
@@ -140,6 +141,7 @@ def _load_dataframe():
 
     df = df.join(ban_rea.set_index('Reason1'), on='Reason1')
     df = df.drop(columns=COLUMNS_TO_DROP)
+    IS_LOADED = True
     return df
 
 
@@ -150,13 +152,11 @@ def _find_id():
         r.close()
 
     find_id = [i.replace('\n', '') for i in line]
-    print(find_id)
 
     df["RoleID"] = df["RoleID"].astype("str")
 
     cond = df["RoleID"].isin(find_id)
     a = df[cond]
-    print(a)
     banned_id = a["RoleID"].unique()
     a = df[df["RoleID"].isin(banned_id)].drop_duplicates(
         subset=['RoleID', 'Reason1'])
@@ -209,24 +209,37 @@ def _update():
 
 if __name__ == '__main__':
     global df
+    global IS_LOADED
+    IS_LOADED = False
 
     while True:
         os.system('cls')
         _load_logo()
-        print("Select option: ")
-        print("0.Quit ")
-        print("1.Load database ")
-        print("2.Find ID ")
-        print("3.Update database ")
-        c = int(input('Select: '))
+        print(" Select option: ")
+        print(" 0.Quit ")
+        print(" 1.Load database ")
+        print(" 2.Find ID ")
+        print(" 3.Update database ")
+        print(" ------------------")
+        if IS_LOADED:
+            print(" Dataframe is loaded")
+            print(df.dtypes)
+            print(" Row: {}\nCol: {}".format(df.shape[0], df.shape[1]))
+        print(" ------------------")
+        c = int(input(' Select: '))
         if c == 0:
-            print("--- Pái pai! ---")
+            print(" --- Pái pai! ---")
             time.sleep(2)
             break
         if c == 1:
             df = _load_dataframe()
-            print(df.dtypes)
+            print(" Load successed!")
+            time.sleep(2)
         if c == 2:
             _find_id()
+            print(" Found!")
+            time.sleep(2)
         if c == 3:
             _update()
+            print(" Updated!")
+            time.sleep(2)
