@@ -1,8 +1,7 @@
 import time
 
-CAPCHA = 'Opeviengi'
 print('CAPCHA: {}'.format(CAPCHA))
-p = input("Xác nhận tạo mới tất cả file (không bao gồm các bản backup, etc...)? Y/n: (write CAPCHA) ")
+p = input("Xác nhận tạo mới tất cả file (không bao gồm các file trong thư mục \"backup\")? Y/n: ")
 
 def clear_men(path):
     with open(path, 'r') as r:
@@ -13,8 +12,12 @@ def clear_men(path):
     w = open(path, 'w')
     w.close()
 
-if p == CAPCHA:
-    files = ['debug.log', 'error_id.txt', 'id_need_to_ban.txt', 'id-openid.txt', 'openid_need_to_ban.txt']
+if p in ['Y', 'y']:
+    files = ['debug.log', 
+            'error_id.txt', 
+            'id_need_to_ban.txt', 
+            'id-openid.txt', 
+            'openid_need_to_ban.txt']
     
     for file in files:
         clear_men(file)
