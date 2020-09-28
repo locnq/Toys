@@ -54,6 +54,12 @@ def _load_dataframe():
     global IS_LOADED
     global COLUMN_NAME
     global COLUMNS_TO_DROP
+    
+    try:
+        df = pd.read_csv('coconut.txt', sep=',', index_col=None, error_bad_lines=False)
+    except:
+        print('\"coconut.txt\" does not exist, please update dataframe by press 3 in menu"')
+        return
 
     # IMPORT TRANSLATE REASON
     Reason = ["使用hosts或VPN等软件拦截反作弊数据方法",
@@ -132,8 +138,7 @@ def _load_dataframe():
 
     ban_rea = pd.DataFrame({'Reason1': Reason,
                             'ReasonEnglish': ReasonEng})
-
-    df = pd.read_csv('coconut.txt', sep=',', index_col=None, error_bad_lines=False)
+    
     df.columns = COLUMN_NAME
 
     df["OpenID"] = df["OpenID"].astype(DEFAULT_TYPE)
@@ -142,6 +147,7 @@ def _load_dataframe():
     df = df.join(ban_rea.set_index('Reason1'), on='Reason1')
     df = df.drop(columns=COLUMNS_TO_DROP)
     IS_LOADED = True
+    print(" Load successed!")
     return df
 
 
@@ -167,6 +173,7 @@ def _find_id():
         'result.txt',
         encoding='utf-8-sig',
         index=False)
+    print(" Found!")
 
 
 def _update():
@@ -205,12 +212,24 @@ def _update():
 
     df["RoleID"] = df["RoleID"].astype(DEFAULT_TYPE)
     df.to_csv('coconut.txt', encoding='utf-8-sig', index=False)
+    print(" Updated!")
 
 
 if __name__ == '__main__':
     global df
     global IS_LOADED
     IS_LOADED = False
+    os.system('cls')
+    _load_logo()
+    print(" Select option: ")
+    print(" 0.Quit ")
+    print(" 1.Load database ")
+    print(" 2.Find ID ")
+    print(" 3.Update database ")
+    print(" ------------------")
+    print(" Loading dataframe ")
+    df = _load_dataframe()
+    time.sleep(2)
 
     while True:
         os.system('cls')
@@ -233,13 +252,10 @@ if __name__ == '__main__':
             break
         if c == 1:
             df = _load_dataframe()
-            print(" Load successed!")
             time.sleep(2)
         if c == 2:
             _find_id()
-            print(" Found!")
             time.sleep(2)
         if c == 3:
             _update()
-            print(" Updated!")
             time.sleep(2)
