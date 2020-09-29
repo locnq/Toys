@@ -46,7 +46,7 @@ def _ban_openid(openid):
 
     btnSubmit = br.find_element_by_xpath('/html/body/div[2]/div[2]/div[1]/div[2]/div/div/div[2]/div[2]/div[1]/form/div[9]/div/button')
     btnSubmit.click()
-    time.sleep(0.5)
+    time.sleep(1)
     ban_openid.clear()
 
 with open('openid_need_to_ban.txt', 'r', encoding='utf-8') as r:
