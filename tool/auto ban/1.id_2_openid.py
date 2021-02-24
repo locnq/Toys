@@ -2,6 +2,9 @@ from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
 import time
 
+USERNAME = "vng001"
+PASSWORD = "pubgmpg3!@#"
+
 
 def _send_get(idin, browser):
     try:
@@ -32,11 +35,11 @@ time.sleep(5)
 
 browser.find_element_by_id("txtLoginName")
 login = browser.find_element_by_id("txtLoginName")
-login.send_keys('vng001')
+login.send_keys(USERNAME)
 
 
 passwordbar = browser.find_element_by_id("txtPassword")
-passwordbar.send_keys('pubgmpg3!@#')
+passwordbar.send_keys(PASSWORD)
 
 a = input('\nEnter capcha on browser, when done press Enter!\n')
 
